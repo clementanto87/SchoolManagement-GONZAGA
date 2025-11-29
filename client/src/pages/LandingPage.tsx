@@ -185,6 +185,7 @@ export default function LandingPage() {
                     fetch(`${API_URL}/api/events`)
                 ]);
 
+                const newsData = await newsRes.json();
                 const eventsData = await eventsRes.json();
 
                 setLatestNews(newsData.slice(0, 3));
