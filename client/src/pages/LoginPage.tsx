@@ -27,9 +27,6 @@ export default function LoginPage() {
 
     const handleSubmit = async () => {
         try {
-            import { API_URL } from '../config';
-
-            // ... imports
 
             const response = await axios.post(`${API_URL}/api/auth/login`, {
                 email,
