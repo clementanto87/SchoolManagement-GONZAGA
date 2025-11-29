@@ -185,11 +185,15 @@ export default function LandingPage() {
                     fetch(`${API_URL}/api/events`)
                 ]);
 
-                const newsData = await newsRes.json();
-                const eventsData = await eventsRes.json();
+                if (newsRes.ok) {
+                    const newsData = await newsRes.json();
+                    setLatestNews(Array.isArray(newsData) ? newsData.slice(0, 3) : []);
+                }
 
-                setLatestNews(newsData.slice(0, 3));
-                setUpcomingEvents(eventsData.slice(0, 3));
+                if (eventsRes.ok) {
+                    const eventsData = await eventsRes.json();
+                    setUpcomingEvents(Array.isArray(eventsData) ? eventsData.slice(0, 3) : []);
+                }
             } catch (error) {
                 console.error('Failed to fetch data:', error);
             }

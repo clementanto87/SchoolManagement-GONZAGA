@@ -1,9 +1,7 @@
 import express from 'express';
-import { PrismaClient } from '@prisma/client';
-import { authenticateToken, authorizeRoles } from '../middleware/auth';
+import prisma from '../prisma';
 
 const router = express.Router();
-const prisma = new PrismaClient();
 
 // Get all news (Public)
 router.get('/', async (req, res) => {
