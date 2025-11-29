@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import * as FileSaver from 'file-saver';
+const { saveAs } = FileSaver;
 import {
     Box,
     Container,
@@ -83,6 +85,22 @@ const DocumentCard = ({ title, icon, index }: { title: string, icon: any, index:
 );
 
 export default function AdmissionsPage() {
+    const [isDownloading, setIsDownloading] = useState(false);
+
+    const downloadApplicationForm = async () => {
+        setIsDownloading(true);
+        try {
+            const response = await fetch('http://localhost:5001/api/applications/form');
+            const blob = await response.blob();
+            saveAs(blob, 'GONZAGA_Application_Form.pdf');
+        } catch (error) {
+            console.error('Error downloading form:', error);
+            // You might want to show an error toast here
+        } finally {
+            setIsDownloading(false);
+        }
+    };
+
     const bgColor = useColorModeValue('gray.50', 'gray.900');
     const { activeStep } = useSteps({
         index: 1,
@@ -308,11 +326,15 @@ export default function AdmissionsPage() {
                                     Apply Online
                                 </Button>
                                 <Button
-                                    bg="white"
-                                    color="teal.600"
-                                    _hover={{ bg: 'gray.100' }}
+                                    size="lg"
+                                    variant="outline"
+                                    colorScheme="whiteAlpha"
+                                    leftIcon={<Icon as={FiFileText as any} />}
+                                    onClick={downloadApplicationForm}
+                                    isLoading={isDownloading}
+                                    loadingText="Preparing..."
                                     w="full"
-                                    leftIcon={<Icon as={FiDownload as any} />}
+                                    _hover={{ bg: 'rgba(255, 255, 255, 0.1)' }}
                                 >
                                     Download Form
                                 </Button>

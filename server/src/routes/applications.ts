@@ -1,9 +1,26 @@
 import { Router } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { authenticateToken, authorizeRoles } from '../middleware/auth';
+import { generateApplicationForm } from '../utils/pdfGenerator';
 
 const router = Router();
 const prisma = new PrismaClient();
+
+// Download application form PDF (Public)
+router.get('/form', async (req, res) => {
+    try {
+        const pdfBuffer = await generateApplicationForm();
+        
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=GONZAGA_Application_Form.pdf');
+        res.setHeader('Content-Length', pdfBuffer.length);
+        
+        res.send(pdfBuffer);
+    } catch (error) {
+        console.error('Error generating PDF:', error);
+        res.status(500).json({ error: 'Failed to generate application form' });
+    }
+});
 
 // Create a new application (Public)
 router.post('/', async (req, res) => {
