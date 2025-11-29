@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as FileSaver from 'file-saver';
-const { saveAs } = FileSaver;
+
 import {
     Box,
     Container,
@@ -38,6 +38,8 @@ import {
 import PublicHeader from '../components/Layout/PublicHeader';
 import PublicFooter from '../components/Layout/PublicFooter';
 import { motion } from 'framer-motion';
+
+const { saveAs } = FileSaver;
 
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);
