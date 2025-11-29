@@ -8,13 +8,13 @@ async function main() {
 
     // Create Admin
     const adminUser = await prisma.user.upsert({
-        where: { email: 'admin@school.com' },
+        where: { email: 'admin@gonzaga.edu' },
         update: {},
         create: {
-            email: 'admin@school.com',
+            email: 'admin@gonzaga.edu',
             password: hashedPassword,
-            firstName: 'Super',
-            lastName: 'Admin',
+            firstName: 'System',
+            lastName: 'Administrator',
             role: UserRole.ADMIN,
             admin: {
                 create: {
@@ -25,7 +25,6 @@ async function main() {
     });
     console.log({ adminUser });
 
-    // Seed Events
     // Seed Events
     try {
         await prisma.event.createMany({
@@ -59,13 +58,13 @@ async function main() {
 
     // Create Teacher
     const teacherUser = await prisma.user.upsert({
-        where: { email: 'teacher@school.com' },
+        where: { email: 'teacher@gonzaga.edu' },
         update: {},
         create: {
-            email: 'teacher@school.com',
+            email: 'teacher@gonzaga.edu',
             password: hashedPassword,
-            firstName: 'John',
-            lastName: 'Doe',
+            firstName: 'Sarah',
+            lastName: 'Johnson',
             role: UserRole.TEACHER,
             teacher: {
                 create: {
@@ -79,19 +78,19 @@ async function main() {
 
     // Create Student
     const studentUser = await prisma.user.upsert({
-        where: { email: 'student@school.com' },
+        where: { email: 'student@gonzaga.edu' },
         update: {},
         create: {
-            email: 'student@school.com',
+            email: 'student@gonzaga.edu',
             password: hashedPassword,
-            firstName: 'Jane',
-            lastName: 'Smith',
+            firstName: 'John',
+            lastName: 'Doe',
             role: UserRole.STUDENT,
             student: {
                 create: {
-                    admissionNo: 'ADM001',
+                    admissionNo: 'ADM2024001',
                     dob: new Date('2010-01-01'),
-                    gender: Gender.FEMALE,
+                    gender: Gender.MALE,
                     grade: '10',
                     section: 'A',
                 },

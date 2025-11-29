@@ -19,6 +19,7 @@ import {
     Badge,
     useToast,
 } from '@chakra-ui/react';
+import { API_URL } from '../config';
 import {
     FiMapPin,
     FiPhone,
@@ -99,7 +100,10 @@ export default function ContactPage() {
     const handleSubmit = async () => {
         setIsSubmitting(true);
         try {
-            const response = await fetch('http://localhost:5001/api/contact', {
+
+            // ... imports
+
+            const response = await fetch(`${API_URL}/api/contact`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -43,6 +43,7 @@ import {
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { useAuth } from '../../context/AuthContext';
+import { API_URL } from '../../config';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 interface LinkItemProps {
@@ -74,8 +75,11 @@ export default function AppLayout({ children }: { children?: ReactNode }) {
       if (!token) return;
       try {
         const [appRes, contactRes] = await Promise.all([
-          fetch('http://localhost:5001/api/applications/stats', { headers: { 'Authorization': `Bearer ${token}` } }),
-          fetch('http://localhost:5001/api/contact/stats', { headers: { 'Authorization': `Bearer ${token}` } })
+
+          // ... imports
+
+          fetch(`${API_URL}/api/applications/stats`, { headers: { 'Authorization': `Bearer ${token}` } }),
+          fetch(`${API_URL}/api/contact/stats`, { headers: { 'Authorization': `Bearer ${token}` } })
         ]);
 
         const appData = await appRes.json();

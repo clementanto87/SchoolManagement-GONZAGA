@@ -32,6 +32,7 @@ import {
     Spinner,
     Flex,
 } from '@chakra-ui/react';
+import { API_URL } from '../config';
 import { FiPlus, FiTrash2, FiEdit, FiCalendar, FiClock, FiMapPin } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 import AppLayout from '../components/Layout/AppLayout';
@@ -120,8 +121,8 @@ export default function AdminEventsPage() {
     const handleSubmit = async () => {
         try {
             const url = editingId
-                ? `http://localhost:5001/api/events/${editingId}`
-                : 'http://localhost:5001/api/events';
+                ? `${API_URL}/api/events/${editingId}`
+                : `${API_URL}/api/events`;
             const method = editingId ? 'PUT' : 'POST';
 
             const response = await fetch(url, {

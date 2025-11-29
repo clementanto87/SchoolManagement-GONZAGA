@@ -38,6 +38,7 @@ import {
 import PublicHeader from '../components/Layout/PublicHeader';
 import PublicFooter from '../components/Layout/PublicFooter';
 import { motion } from 'framer-motion';
+import { API_URL } from '../config';
 
 const { saveAs } = FileSaver;
 
@@ -92,7 +93,11 @@ export default function AdmissionsPage() {
     const downloadApplicationForm = async () => {
         setIsDownloading(true);
         try {
-            const response = await fetch('http://localhost:5001/api/applications/form');
+            import { API_URL } from '../config';
+
+            // ... imports
+
+            const response = await fetch(`${API_URL}/api/applications/form`);
             const blob = await response.blob();
             saveAs(blob, 'GONZAGA_Application_Form.pdf');
         } catch (error) {

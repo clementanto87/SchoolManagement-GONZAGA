@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 interface User {
     id: string;
@@ -32,7 +33,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     // Verify token and get user data
                     // For now, we'll just assume the token is valid if we have it, 
                     // but ideally we should fetch /api/auth/me
-                    const response = await axios.get('http://localhost:5001/api/auth/me', {
+
+
+                    const response = await axios.get(`${API_URL}/api/auth/me`, {
                         headers: { Authorization: `Bearer ${storedToken}` }
                     });
                     setUser(response.data);

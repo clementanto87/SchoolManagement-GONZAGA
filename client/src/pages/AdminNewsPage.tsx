@@ -30,6 +30,7 @@ import {
     Text,
     Flex,
 } from '@chakra-ui/react';
+import { API_URL } from '../config';
 import { FiPlus, FiTrash2, FiEdit } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 import AppLayout from '../components/Layout/AppLayout';
@@ -91,8 +92,8 @@ export default function AdminNewsPage() {
     const handleSubmit = async () => {
         try {
             const url = isEditing
-                ? `http://localhost:5001/api/news/${formData.id}`
-                : 'http://localhost:5001/api/news';
+                ? `${API_URL}/api/news/${formData.id}`
+                : `${API_URL}/api/news`;
 
             const method = isEditing ? 'PUT' : 'POST';
 

@@ -26,6 +26,7 @@ import {
     useColorModeValue,
     Icon,
 } from '@chakra-ui/react';
+import { API_URL } from '../config';
 import { FiUser, FiUsers, FiCheckCircle, FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import PublicHeader from '../components/Layout/PublicHeader';
 import PublicFooter from '../components/Layout/PublicFooter';
@@ -81,7 +82,10 @@ export default function ApplicationPage() {
     const handleSubmit = async () => {
         setIsSubmitting(true);
         try {
-            const response = await fetch('http://localhost:5001/api/applications', {
+
+            // ... imports
+
+            const response = await fetch(`${API_URL}/api/applications`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

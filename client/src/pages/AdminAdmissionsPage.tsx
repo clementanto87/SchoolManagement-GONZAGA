@@ -23,6 +23,7 @@ import {
     MenuItem,
     Button,
 } from '@chakra-ui/react';
+import { API_URL } from '../config';
 import { FiUsers, FiMail, FiPhone, FiMapPin, FiCalendar, FiChevronDown } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 import AppLayout from '../components/Layout/AppLayout';
@@ -36,7 +37,7 @@ export default function AdminAdmissionsPage() {
     const fetchApplications = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch('http://localhost:5001/api/applications', {
+            const response = await fetch(`${API_URL}/api/applications`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },

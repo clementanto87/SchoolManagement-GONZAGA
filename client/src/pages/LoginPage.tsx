@@ -14,6 +14,7 @@ import {
     useToast,
 } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext';
+import { API_URL } from '../config';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,7 +27,11 @@ export default function LoginPage() {
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.post('http://localhost:5001/api/auth/login', {
+            import { API_URL } from '../config';
+
+            // ... imports
+
+            const response = await axios.post(`${API_URL}/api/auth/login`, {
                 email,
                 password,
             });

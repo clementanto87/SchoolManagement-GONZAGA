@@ -13,7 +13,9 @@ import {
     Input,
     InputGroup,
     InputLeftElement,
+    Badge
 } from '@chakra-ui/react';
+import { API_URL } from '../config';
 import { FiArrowRight, FiSearch, FiCalendar } from 'react-icons/fi';
 import PublicHeader from '../components/Layout/PublicHeader';
 import PublicFooter from '../components/Layout/PublicFooter';
@@ -37,16 +39,16 @@ const NewsCard = ({ date, title, excerpt, index }: { date: string; title: string
             _hover={{ bg: 'gray.50', shadow: 'lg', transform: 'translateY(-2px)' }}
             sx={{ transition: 'all 0.3s ease' }}
         >
-            <Box 
-                as="span" 
-                display="inline-block" 
-                bg="blue.50" 
-                color="blue.600" 
-                px={3} 
-                py={1} 
-                rounded="full" 
-                fontSize="xs" 
-                fontWeight="bold" 
+            <Box
+                as="span"
+                display="inline-block"
+                bg="blue.50"
+                color="blue.600"
+                px={3}
+                py={1}
+                rounded="full"
+                fontSize="xs"
+                fontWeight="bold"
                 mb={3}
             >
                 {date}
@@ -72,7 +74,9 @@ export default function NewsPage() {
     React.useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await fetch('http://localhost:5001/api/news');
+                // ... imports
+
+                const response = await fetch(`${API_URL}/api/news`);
                 const data = await response.json();
                 setNewsItems(data);
             } catch (error) {
