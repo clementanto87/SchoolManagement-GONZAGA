@@ -93,9 +93,6 @@ export default function AdmissionsPage() {
     const downloadApplicationForm = async () => {
         setIsDownloading(true);
         try {
-            import { API_URL } from '../config';
-
-            // ... imports
 
             const response = await fetch(`${API_URL}/api/applications/form`);
             const blob = await response.blob();
