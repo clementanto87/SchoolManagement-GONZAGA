@@ -32,7 +32,7 @@ const NewsModal = ({ isOpen, onClose, news }: { isOpen: boolean; onClose: () => 
                     position="relative"
                 >
                     <Box position="absolute" top={0} right={0} opacity={0.1}>
-                        <Icon as={FiAward} w={40} h={40} transform="rotate(15deg) translate(20px, -20px)" />
+                        <Icon as={FiAward as any} w={40} h={40} transform="rotate(15deg) translate(20px, -20px)" />
                     </Box>
                     <VStack align="start" spacing={3} position="relative" zIndex={1}>
                         <Tag size="md" variant="solid" colorScheme="whiteAlpha" rounded="full">
