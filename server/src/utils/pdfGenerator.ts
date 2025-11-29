@@ -7,7 +7,7 @@ export const generateApplicationForm = () => {
         try {
             const doc = new PDFDocument({ margin: 50 });
             const buffers: Buffer[] = [];
-            
+
             // Collect PDF data
             doc.on('data', buffers.push.bind(buffers));
             doc.on('end', () => {
@@ -20,17 +20,17 @@ export const generateApplicationForm = () => {
                 align: 'center',
                 underline: true
             });
-            
+
             doc.moveDown();
             doc.fontSize(16).text('Student Admission Form', {
                 align: 'center'
             });
-            
+
             doc.moveDown();
             doc.fontSize(12).text('Personal Information', {
                 underline: true
             });
-            
+
             // Add form fields
             doc.moveDown(0.5);
             doc.text('Student Name: _________________________________________________');
@@ -40,12 +40,12 @@ export const generateApplicationForm = () => {
             doc.text('Grade Applying For: ______________  Academic Year: ___________');
             doc.moveDown(1);
             doc.text('Previous School: _____________________________________________');
-            
+
             doc.moveDown(1.5);
             doc.fontSize(12).text('Parent/Guardian Information', {
                 underline: true
             });
-            
+
             doc.moveDown(0.5);
             doc.text('Parent/Guardian Name: ________________________________________');
             doc.moveDown(1);
@@ -54,13 +54,12 @@ export const generateApplicationForm = () => {
             doc.text('Address: ____________________________________________________');
             doc.moveDown(1);
             doc.text('City: ____________________  State: ________  ZIP: __________');
-            
+
             doc.moveDown(2);
-            doc.fontSize(10).text('Please submit this completed form along with the required documents to the school office.', {
-                align: 'center',
-                italic: true
+            doc.font('Helvetica-Oblique').fontSize(10).text('Please submit this completed form along with the required documents to the school office.', {
+                align: 'center'
             });
-            
+
             // Finalize the PDF
             doc.end();
         } catch (error) {
