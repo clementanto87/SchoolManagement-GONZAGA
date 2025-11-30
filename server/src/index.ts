@@ -2,7 +2,13 @@ import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import dotenv from 'dotenv';
 import prisma from './prisma';
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 5001;
 
 import authRoutes from './routes/auth';
 import studentRoutes from './routes/students';
