@@ -34,18 +34,33 @@ function App() {
       <AuthProvider>
         <Router>
           <Routes>
+            {/* Public Routes */}
             <Route path="/" element={<LandingPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/academics" element={<AcademicsPage />} />
-            <Route path="/admissions" element={<AdmissionsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/apply" element={<ApplicationPage />} />
-            <Route path="/learn-more" element={<LearnMorePage />} />
-            <Route path="/news" element={<NewsPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/dashboard" element={
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/events" element={<EventsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/admissions" element={<AdmissionsPage />} />
+
+            {/* Admin Routes */}
+            <Route path="/admin/dashboard" element={
               <ProtectedRoute>
-                <DashboardPage />
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/students" element={
+              <ProtectedRoute>
+                <AdminStudentsPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/teachers" element={
+              <ProtectedRoute>
+                <AdminTeachersPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/classes" element={
+              <ProtectedRoute>
+                <AdminClassesPage />
               </ProtectedRoute>
             } />
             <Route path="/admin/news" element={
@@ -58,20 +73,23 @@ function App() {
                 <AdminEventsPage />
               </ProtectedRoute>
             } />
+            <Route path="/admin/contact" element={
+              <ProtectedRoute>
+                <AdminContactPage />
+              </ProtectedRoute>
+            } />
             <Route path="/admin/admissions" element={
               <ProtectedRoute>
                 <AdminAdmissionsPage />
               </ProtectedRoute>
             } />
-            <Route path="/admin/messages" element={
-              <ProtectedRoute>
-                <AdminContactPage />
-              </ProtectedRoute>
+            <AdminContactPage />
+          </ProtectedRoute>
             } />
-          </Routes>
-        </Router>
-      </AuthProvider>
-    </ChakraProvider>
+        </Routes>
+      </Router>
+    </AuthProvider>
+    </ChakraProvider >
   );
 }
 
