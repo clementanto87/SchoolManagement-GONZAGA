@@ -34,6 +34,54 @@ router.get('/me/classes', authenticateToken, authorizeRoles('TEACHER'), async (r
     }
 });
 
+// Get logged-in teacher's schedule (all periods assigned to them)
+router.get('/me/schedule', authenticateToken, authorizeRoles('TEACHER'), async (req, res) => {
+    try {
+        const user = await prisma.user.findUnique({
+            where: { id: (req as any).user.userId },
+            include: { teacher: true }
+        });
+
+        if (!user?.teacher) {
+            return res.status(404).json({ error: 'Teacher profile not found' });
+        }
+
+        const periods = await prisma.period.findMany({
+            where: {
+                teacherId: user.teacher.id
+            },
+            include: {
+                subject: true,
+                timetable: {
+                    include: {
+                        class: true
+                    }
+                }
+            },
+            orderBy: [
+                { timetable: { dayOfWeek: 'asc' } },
+                { startTime: 'asc' }
+            ]
+        });
+
+        // Transform data for easier frontend consumption
+        const schedule = periods.map(period => ({
+            id: period.id,
+            day: period.timetable.dayOfWeek,
+            startTime: period.startTime,
+            endTime: period.endTime,
+            subject: period.subject.name,
+            className: `${period.timetable.class.name}-${period.timetable.class.section}`,
+            room: period.roomNo || 'N/A'
+        }));
+
+        res.json(schedule);
+    } catch (error) {
+        console.error('Error fetching teacher schedule:', error);
+        res.status(500).json({ error: 'Failed to fetch schedule' });
+    }
+});
+
 // Get logged-in teacher's profile
 router.get('/me', authenticateToken, authorizeRoles('TEACHER'), async (req, res) => {
     res.json({ message: 'Get all teachers' });

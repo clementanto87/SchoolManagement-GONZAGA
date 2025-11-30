@@ -27,6 +27,8 @@ import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import TeacherClassesPage from './pages/teacher/TeacherClassesPage';
 import TeacherAttendancePage from './pages/teacher/TeacherAttendancePage';
 import TeacherAssignmentsPage from './pages/teacher/TeacherAssignmentsPage';
+import TeacherAssignmentDetailsPage from './pages/teacher/TeacherAssignmentDetailsPage';
+import TeacherTimetablePage from './pages/teacher/TeacherTimetablePage';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { token, isLoading } = useAuth();
@@ -66,6 +68,8 @@ function App() {
             <Route path="/teacher/classes" element={<ProtectedRoute><TeacherClassesPage /></ProtectedRoute>} />
             <Route path="/teacher/attendance" element={<ProtectedRoute><TeacherAttendancePage /></ProtectedRoute>} />
             <Route path="/teacher/assignments" element={<ProtectedRoute><TeacherAssignmentsPage /></ProtectedRoute>} />
+            <Route path="/teacher/assignments/:id" element={<ProtectedRoute><TeacherAssignmentDetailsPage /></ProtectedRoute>} />
+            <Route path="/teacher/timetable" element={<ProtectedRoute><TeacherTimetablePage /></ProtectedRoute>} />
 
             {/* Fallback */}
             <Route path="*" element={<Navigate to="/" replace />} />

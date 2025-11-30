@@ -144,7 +144,7 @@ const NavItem = ({ icon, children, path, ...rest }: NavItemProps) => {
                     _groupHover={{
                         color: isActive ? 'white' : 'blue.600',
                     }}
-                    as={icon}
+                    as={icon as any}
                 />
                 {children}
             </Flex>
@@ -181,7 +181,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 onClick={onOpen}
                 variant="outline"
                 aria-label="open menu"
-                icon={<FiMenu />}
+                icon={<Icon as={FiMenu as any} />}
             />
 
             <Text
@@ -197,7 +197,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                     size="lg"
                     variant="ghost"
                     aria-label="open menu"
-                    icon={<FiBell />}
+                    icon={<Icon as={FiBell as any} />}
                 />
                 <Flex alignItems={'center'}>
                     <Menu>
@@ -222,7 +222,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                                     </Text>
                                 </VStack>
                                 <Box display={{ base: 'none', md: 'flex' }}>
-                                    <FiChevronDown />
+                                    <Icon as={FiChevronDown as any} />
                                 </Box>
                             </HStack>
                         </MenuButton>
@@ -231,7 +231,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                             borderColor={useColorModeValue('gray.200', 'gray.700')}>
                             <MenuItem onClick={() => navigate('/teacher/profile')}>Profile</MenuItem>
                             <MenuDivider />
-                            <MenuItem onClick={handleLogout} icon={<FiLogOut />}>Sign out</MenuItem>
+                            <MenuItem onClick={handleLogout} icon={<Icon as={FiLogOut as any} />}>Sign out</MenuItem>
                         </MenuList>
                     </Menu>
                 </Flex>

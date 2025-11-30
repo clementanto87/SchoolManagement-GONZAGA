@@ -88,12 +88,12 @@ export default function TeacherClassesPage() {
                                     </HStack>
 
                                     <HStack color="gray.600">
-                                        <Icon as={FiUsers} />
+                                        <Icon as={FiUsers as any} />
                                         <Text>{cls._count.students} Students</Text>
                                     </HStack>
 
                                     <Button
-                                        rightIcon={<Icon as={FiArrowRight} />}
+                                        rightIcon={<Icon as={FiArrowRight as any} />}
                                         colorScheme="blue"
                                         variant="ghost"
                                         size="sm"

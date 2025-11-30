@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     Box,
     Heading,
@@ -54,6 +55,7 @@ export default function TeacherAssignmentsPage() {
     const [isLoading, setIsLoading] = useState(true);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { token } = useAuth();
+    const navigate = useNavigate();
     const toast = useToast();
     const bgColor = useColorModeValue('gray.50', 'gray.900');
 
@@ -151,7 +153,7 @@ export default function TeacherAssignmentsPage() {
             <Box bg={bgColor} minH="calc(100vh - 100px)" p={6}>
                 <HStack justify="space-between" mb={6}>
                     <Heading size="lg">Assignments</Heading>
-                    <Button leftIcon={<FiPlus />} colorScheme="blue" onClick={onOpen}>
+                    <Button leftIcon={<Icon as={FiPlus as any} />} colorScheme="blue" onClick={onOpen}>
                         Create Assignment
                     </Button>
                 </HStack>
@@ -187,14 +189,17 @@ export default function TeacherAssignmentsPage() {
 
                                     <HStack color="gray.500" fontSize="xs" w="full" pt={2} borderTop="1px solid" borderColor="gray.100">
                                         <HStack>
-                                            <Icon as={FiCalendar} />
+                                            <Icon as={FiCalendar as any} />
                                             <Text>Due: {new Date(assignment.dueDate).toLocaleDateString()}</Text>
                                         </HStack>
                                         <HStack ml="auto">
-                                            <Icon as={FiFileText} />
+                                            <Icon as={FiFileText as any} />
                                             <Text>{assignment._count.submissions} Submissions</Text>
                                         </HStack>
                                     </HStack>
+                                    <Button size="sm" w="full" mt={2} onClick={() => navigate(`/teacher/assignments/${assignment.id}`)}>
+                                        View Submissions
+                                    </Button>
                                 </VStack>
                             </Box>
                         ))}
@@ -239,6 +244,6 @@ export default function TeacherAssignmentsPage() {
                     </ModalContent>
                 </Modal>
             </Box>
-        </TeacherLayout>
+        </TeacherLayout >
     );
 }
