@@ -14,6 +14,7 @@ import AdmissionsPage from './pages/AdmissionsPage';
 import AboutPage from './pages/AboutPage';
 import AcademicsPage from './pages/AcademicsPage';
 import LearnMorePage from './pages/LearnMorePage';
+import ApplicationPage from './pages/ApplicationPage';
 
 // Admin Pages
 import AdminDashboard from './pages/AdminDashboard';
@@ -58,6 +59,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/academics" element={<AcademicsPage />} />
             <Route path="/learn-more" element={<LearnMorePage />} />
+            <Route path="/apply" element={<ApplicationPage />} />
 
             {/* Admin Routes */}
             <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
