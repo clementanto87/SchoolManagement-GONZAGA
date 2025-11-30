@@ -11,6 +11,9 @@ import NewsPage from './pages/NewsPage';
 import EventsPage from './pages/EventsPage';
 import ContactPage from './pages/ContactPage';
 import AdmissionsPage from './pages/AdmissionsPage';
+import AboutPage from './pages/AboutPage';
+import AcademicsPage from './pages/AcademicsPage';
+import LearnMorePage from './pages/LearnMorePage';
 
 // Admin Pages
 import AdminDashboard from './pages/AdminDashboard';
@@ -52,6 +55,9 @@ function App() {
             <Route path="/events" element={<EventsPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/admissions" element={<AdmissionsPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/academics" element={<AcademicsPage />} />
+            <Route path="/learn-more" element={<LearnMorePage />} />
 
             {/* Admin Routes */}
             <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
