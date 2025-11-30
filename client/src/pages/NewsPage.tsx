@@ -70,12 +70,11 @@ export default function NewsPage() {
     const bgColor = useColorModeValue('gray.50', 'gray.900');
     const [newsItems, setNewsItems] = React.useState<any[]>([]);
     const [isLoading, setIsLoading] = React.useState(true);
+    const [searchQuery, setSearchQuery] = React.useState('');
 
     React.useEffect(() => {
         const fetchNews = async () => {
             try {
-                // ... imports
-
                 const response = await fetch(`${API_URL}/api/news`);
                 const data = await response.json();
                 setNewsItems(data);
@@ -88,6 +87,11 @@ export default function NewsPage() {
 
         fetchNews();
     }, []);
+
+    const filteredNews = newsItems.filter(news =>
+        news.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        news.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return (
         <Box bg={bgColor} minH="100vh" overflowX="hidden">
@@ -110,16 +114,18 @@ export default function NewsPage() {
                         <InputLeftElement pointerEvents="none">
                             <Icon as={FiSearch as any} color="gray.400" />
                         </InputLeftElement>
-                        <Input placeholder="Search news..." bg="white" />
+                        <Input
+                            placeholder="Search news..."
+                            bg="white"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
                     </InputGroup>
-                    <Button leftIcon={<Icon as={FiCalendar as any} />} variant="outline" bg="white">
-                        Filter by Date
-                    </Button>
                 </Stack>
 
                 {/* News Grid */}
                 <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
-                    {newsItems.map((news, index) => (
+                    {filteredNews.map((news, index) => (
                         <NewsCard
                             key={news.id || index}
                             index={index}
