@@ -3,21 +3,30 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import theme from './theme';
-import LoginPage from './pages/LoginPage';
-import DashboardPage from './pages/DashboardPage';
-import AppLayout from './components/Layout/AppLayout';
+
+// Public Pages
 import LandingPage from './pages/LandingPage';
-import AboutPage from './pages/AboutPage';
-import AcademicsPage from './pages/AcademicsPage';
-import AdmissionsPage from './pages/AdmissionsPage';
-import ContactPage from './pages/ContactPage';
-import ApplicationPage from './pages/ApplicationPage';
-import LearnMorePage from './pages/LearnMorePage';
+import LoginPage from './pages/LoginPage';
 import NewsPage from './pages/NewsPage';
+import EventsPage from './pages/EventsPage';
+import ContactPage from './pages/ContactPage';
+import AdmissionsPage from './pages/AdmissionsPage';
+
+// Admin Pages
+import AdminDashboard from './pages/AdminDashboard';
+import AdminStudentsPage from './pages/AdminStudentsPage';
+import AdminTeachersPage from './pages/AdminTeachersPage';
+import AdminClassesPage from './pages/AdminClassesPage';
 import AdminNewsPage from './pages/AdminNewsPage';
 import AdminEventsPage from './pages/AdminEventsPage';
-import AdminAdmissionsPage from './pages/AdminAdmissionsPage';
 import AdminContactPage from './pages/AdminContactPage';
+import AdminAdmissionsPage from './pages/AdminAdmissionsPage';
+
+// Teacher Pages
+import TeacherDashboard from './pages/teacher/TeacherDashboard';
+import TeacherClassesPage from './pages/teacher/TeacherClassesPage';
+import TeacherAttendancePage from './pages/teacher/TeacherAttendancePage';
+import TeacherAssignmentsPage from './pages/teacher/TeacherAssignmentsPage';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { token, isLoading } = useAuth();
@@ -43,53 +52,27 @@ function App() {
             <Route path="/admissions" element={<AdmissionsPage />} />
 
             {/* Admin Routes */}
-            <Route path="/admin/dashboard" element={
-              <ProtectedRoute>
-                <AdminDashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/students" element={
-              <ProtectedRoute>
-                <AdminStudentsPage />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/teachers" element={
-              <ProtectedRoute>
-                <AdminTeachersPage />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/classes" element={
-              <ProtectedRoute>
-                <AdminClassesPage />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/news" element={
-              <ProtectedRoute>
-                <AdminNewsPage />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/events" element={
-              <ProtectedRoute>
-                <AdminEventsPage />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/contact" element={
-              <ProtectedRoute>
-                <AdminContactPage />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/admissions" element={
-              <ProtectedRoute>
-                <AdminAdmissionsPage />
-              </ProtectedRoute>
-            } />
-            <AdminContactPage />
-          </ProtectedRoute>
-            } />
-        </Routes>
-      </Router>
-    </AuthProvider>
-    </ChakraProvider >
+            <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+            <Route path="/admin/students" element={<ProtectedRoute><AdminStudentsPage /></ProtectedRoute>} />
+            <Route path="/admin/teachers" element={<ProtectedRoute><AdminTeachersPage /></ProtectedRoute>} />
+            <Route path="/admin/classes" element={<ProtectedRoute><AdminClassesPage /></ProtectedRoute>} />
+            <Route path="/admin/news" element={<ProtectedRoute><AdminNewsPage /></ProtectedRoute>} />
+            <Route path="/admin/events" element={<ProtectedRoute><AdminEventsPage /></ProtectedRoute>} />
+            <Route path="/admin/contact" element={<ProtectedRoute><AdminContactPage /></ProtectedRoute>} />
+            <Route path="/admin/admissions" element={<ProtectedRoute><AdminAdmissionsPage /></ProtectedRoute>} />
+
+            {/* Teacher Routes */}
+            <Route path="/teacher/dashboard" element={<ProtectedRoute><TeacherDashboard /></ProtectedRoute>} />
+            <Route path="/teacher/classes" element={<ProtectedRoute><TeacherClassesPage /></ProtectedRoute>} />
+            <Route path="/teacher/attendance" element={<ProtectedRoute><TeacherAttendancePage /></ProtectedRoute>} />
+            <Route path="/teacher/assignments" element={<ProtectedRoute><TeacherAssignmentsPage /></ProtectedRoute>} />
+
+            {/* Fallback */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </ChakraProvider>
   );
 }
 
