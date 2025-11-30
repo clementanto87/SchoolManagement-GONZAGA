@@ -61,7 +61,7 @@ const LinkItems: LinkItemProps[] = [
   { name: 'Manage News', icon: FiFileText, path: '/admin/news' },
   { name: 'Manage Events', icon: FiCalendar, path: '/admin/events' },
   { name: 'Admissions', icon: FiUsers, path: '/admin/admissions' },
-  { name: 'Messages', icon: FiMail, path: '/admin/messages' },
+  { name: 'Messages', icon: FiMail, path: '/admin/contact' },
 ];
 
 export default function AppLayout({ children }: { children?: ReactNode }) {

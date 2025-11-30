@@ -231,7 +231,7 @@ export default function LandingPage() {
                         left={0}
                         w={'full'}
                         h={'full'}
-                        bgGradient={'linear(to-r, blue.900, blue.800, transparent)'}
+                        bgGradient={'linear(to-r, blue.900 60%, transparent)'}
                         opacity={0.9}
                     />
                 </Box>
@@ -251,6 +251,7 @@ export default function LandingPage() {
                             fontWeight={'bold'}
                             lineHeight={'1.1'}
                             color={'white'}
+                            textShadow="2px 2px 4px rgba(0,0,0,0.4)"
                         >
                             Empowering Future <br />
                             <Text as={'span'} color={'blue.200'}>
@@ -262,7 +263,9 @@ export default function LandingPage() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
                             fontSize={'xl'}
-                            color={'gray.200'}
+                            color={'gray.100'}
+                            fontWeight="medium"
+                            textShadow="1px 1px 2px rgba(0,0,0,0.5)"
                         >
                             Gonzaga Matric Higher Secondary School provides world-class education with a focus on holistic development, academic excellence, and moral values.
                         </MotionText>
