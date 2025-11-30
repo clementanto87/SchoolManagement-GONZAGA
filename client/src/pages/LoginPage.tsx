@@ -40,9 +40,12 @@ export default function LoginPage() {
                 isClosable: true,
             });
             if (response.data.user.role === 'ADMIN') {
-                navigate('/admin/news');
+                navigate('/admin/dashboard');
+            } else if (response.data.user.role === 'TEACHER') {
+                navigate('/teacher/dashboard');
             } else {
-                navigate('/dashboard');
+                // Default fallback for students or others
+                navigate('/teacher/dashboard');
             }
         } catch (error: any) {
             toast({
