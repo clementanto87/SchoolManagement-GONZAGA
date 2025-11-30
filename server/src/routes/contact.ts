@@ -70,7 +70,7 @@ router.get('/stats', authenticateToken, authorizeRoles('ADMIN'), async (req, res
         res.json({ pendingCount });
     } catch (error) {
         console.error('Error fetching message stats:', error);
-        res.status(500).json({ error: 'Failed to fetch stats' });
+        res.status(500).json({ error: 'Failed to fetch stats', details: error instanceof Error ? error.message : String(error) });
     }
 });
 

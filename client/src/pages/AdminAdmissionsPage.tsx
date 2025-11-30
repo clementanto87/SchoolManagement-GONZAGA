@@ -68,7 +68,7 @@ export default function AdminAdmissionsPage() {
 
     const handleStatusUpdate = async (id: string, newStatus: string) => {
         try {
-            const response = await fetch(`http://localhost:5001/api/applications/${id}`, {
+            const response = await fetch(`${API_URL}/api/applications/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

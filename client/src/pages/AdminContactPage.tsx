@@ -68,7 +68,7 @@ export default function AdminContactPage() {
 
     const handleStatusUpdate = async (id: string, newStatus: string) => {
         try {
-            const response = await fetch(`http://localhost:5001/api/contact/${id}`, {
+            const response = await fetch(`${API_URL}/api/contact/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

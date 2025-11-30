@@ -53,7 +53,7 @@ export default function AdminNewsPage() {
 
     const fetchNews = async () => {
         try {
-            const response = await fetch('http://localhost:5001/api/news');
+            const response = await fetch(`${API_URL}/api/news`);
             const data = await response.json();
             setNewsItems(data);
         } catch (error) {
@@ -131,7 +131,7 @@ export default function AdminNewsPage() {
     const handleDelete = async (id: string) => {
         if (!window.confirm('Are you sure you want to delete this news item?')) return;
         try {
-            const response = await fetch(`http://localhost:5001/api/news/${id}`, {
+            const response = await fetch(`${API_URL}/api/news/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,

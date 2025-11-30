@@ -69,7 +69,7 @@ export default function AdminEventsPage() {
     const fetchEvents = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch('http://localhost:5001/api/events');
+            const response = await fetch(`${API_URL}/api/events`);
             const data = await response.json();
             if (Array.isArray(data)) {
                 setEvents(data);
@@ -161,7 +161,7 @@ export default function AdminEventsPage() {
     const handleDelete = async (id: string) => {
         if (window.confirm('Are you sure you want to delete this event?')) {
             try {
-                const response = await fetch(`http://localhost:5001/api/events/${id}`, {
+                const response = await fetch(`${API_URL}/api/events/${id}`, {
                     method: 'DELETE',
                     headers: {
                         Authorization: `Bearer ${token}`,

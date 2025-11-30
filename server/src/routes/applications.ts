@@ -10,11 +10,11 @@ const prisma = new PrismaClient();
 router.get('/form', async (req, res) => {
     try {
         const pdfBuffer = await generateApplicationForm();
-        
+
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', 'attachment; filename=GONZAGA_Application_Form.pdf');
         res.setHeader('Content-Length', pdfBuffer.length);
-        
+
         res.send(pdfBuffer);
     } catch (error) {
         console.error('Error generating PDF:', error);
@@ -85,7 +85,7 @@ router.get('/stats', authenticateToken, authorizeRoles('ADMIN'), async (req, res
         res.json({ pendingCount });
     } catch (error) {
         console.error('Error fetching application stats:', error);
-        res.status(500).json({ error: 'Failed to fetch stats' });
+        res.status(500).json({ error: 'Failed to fetch stats', details: error instanceof Error ? error.message : String(error) });
     }
 });
 
