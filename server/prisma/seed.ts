@@ -70,11 +70,38 @@ async function main() {
                 create: {
                     hireDate: new Date(),
                     specialization: 'Mathematics',
+                    qualification: 'M.Sc, B.Ed',
+                    experience: 8
                 },
             },
         },
+        include: {
+            teacher: true
+        }
     });
     console.log({ teacherUser });
+
+    // Create Class 10-A
+    const class10A = await prisma.class.create({
+        data: {
+            name: '10',
+            section: 'A',
+            academicYear: '2023-2024',
+            classTeacherId: teacherUser.teacher?.id,
+        }
+    });
+    console.log({ class10A });
+
+    // Create Subject
+    const mathSubject = await prisma.subject.create({
+        data: {
+            name: 'Mathematics',
+            code: 'MATH101',
+            description: 'Grade 10 Mathematics',
+            teacherId: teacherUser.teacher?.id,
+        }
+    });
+    console.log({ mathSubject });
 
     // Create Student
     const studentUser = await prisma.user.upsert({
@@ -93,6 +120,7 @@ async function main() {
                     gender: Gender.MALE,
                     grade: '10',
                     section: 'A',
+                    classId: class10A.id
                 },
             },
         },

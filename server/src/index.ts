@@ -19,6 +19,8 @@ import applicationRoutes from './routes/applications';
 import newsRoutes from './routes/news';
 import eventsRoutes from './routes/events';
 import contactRoutes from './routes/contact';
+import attendanceRoutes from './routes/attendance';
+import assignmentRoutes from './routes/assignments';
 
 // ... imports
 
@@ -53,6 +55,8 @@ app.use('/api/applications', applicationRoutes);
 app.use('/api/news', newsRoutes);
 app.use('/api/events', eventsRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/attendance', attendanceRoutes);
+app.use('/api/assignments', assignmentRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req: Request, res: Response) => {
