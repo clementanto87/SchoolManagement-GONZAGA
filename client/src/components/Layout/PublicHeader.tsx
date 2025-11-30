@@ -32,6 +32,7 @@ const NavLink = ({ children, path }: { children: React.ReactNode; path: string }
             fontWeight={isActive ? 'bold' : 'medium'}
             color={isActive ? 'blue.600' : 'gray.600'}
             bg={isActive ? 'blue.50' : 'transparent'}
+            display="block"
             _hover={{
                 textDecoration: 'none',
                 color: 'blue.600',
@@ -101,7 +102,7 @@ export default function PublicHeader() {
                     <VStack
                         bg={useColorModeValue('white', 'gray.800')}
                         p={4}
-                        display={{ md: 'none' }}
+                        display={{ base: 'flex', md: 'none' }}
                         rounded={'xl'}
                         shadow={'lg'}
                         mt={4}
