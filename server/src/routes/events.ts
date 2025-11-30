@@ -14,7 +14,8 @@ router.get('/', async (req, res) => {
         });
         res.json(events);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch events' });
+        console.error('Error fetching events:', error);
+        res.status(500).json({ error: 'Failed to fetch events', details: error instanceof Error ? error.message : String(error) });
     }
 });
 

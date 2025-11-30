@@ -2,14 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import { PrismaClient } from '@prisma/client';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const app = express();
-const PORT = process.env.PORT || 5001;
-const prisma = new PrismaClient();
+import prisma from './prisma';
 
 import authRoutes from './routes/auth';
 import studentRoutes from './routes/students';
@@ -59,8 +52,14 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 // Start server
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
+  try {
+    await prisma.$connect();
+    console.log('✅ Database connected successfully');
+  } catch (error) {
+    console.error('❌ Database connection failed:', error);
+  }
 });
 
 // Handle unhandled promise rejections

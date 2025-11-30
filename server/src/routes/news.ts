@@ -12,7 +12,8 @@ router.get('/', async (req, res) => {
         });
         res.json(news);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch news' });
+        console.error('Error fetching news:', error);
+        res.status(500).json({ error: 'Failed to fetch news', details: error instanceof Error ? error.message : String(error) });
     }
 });
 
