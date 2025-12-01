@@ -253,14 +253,25 @@ export default function LandingPage() {
                     transform="scale(1.05)" // Subtle zoom effect
                     transition="transform 10s ease-out"
                 >
+                    <Image
+                        src="/gonzaga-patron.png"
+                        alt="Patron Saint"
+                        position="absolute"
+                        right={{ base: '-10%', lg: '5%' }}
+                        bottom={0}
+                        h={{ base: '60%', lg: '90%' }}
+                        objectFit="contain"
+                        opacity={0.6}
+                        filter="grayscale(20%)"
+                    />
                     <Box
                         position={'absolute'}
                         top={0}
                         left={0}
                         w={'full'}
                         h={'full'}
-                        bgGradient={'linear(to-r, blue.900 60%, blackAlpha.600)'}
-                        opacity={0.92}
+                        bgGradient={'linear(to-r, blue.900 60%, blue.900)'}
+                        opacity={0.85}
                     />
                 </Box>
 
