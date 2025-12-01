@@ -169,6 +169,32 @@ const EventCard = ({ day, month, title, time, index }: { day: string; month: str
     );
 };
 
+// --- New Components ---
+
+const StatCard = ({ label, value, icon }: { label: string; value: string; icon: any }) => {
+    return (
+        <MotionBox
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            p={6}
+            textAlign={'center'}
+            color={'white'}
+        >
+            <Flex justify={'center'} mb={4}>
+                <Icon as={icon} w={10} h={10} color={'blue.200'} />
+            </Flex>
+            <Heading fontSize={'4xl'} fontWeight={'bold'} mb={2}>
+                {value}
+            </Heading>
+            <Text fontSize={'lg'} opacity={0.8}>
+                {label}
+            </Text>
+        </MotionBox>
+    );
+};
+
 export default function LandingPage() {
     const navigate = useNavigate();
     const bg = useColorModeValue('white', 'gray.800');
@@ -214,7 +240,7 @@ export default function LandingPage() {
             <PublicHeader />
 
             {/* Hero Section */}
-            <Box position={'relative'} height={'600px'} overflow={'hidden'}>
+            <Box position={'relative'} height={{ base: '600px', md: '700px' }} overflow={'hidden'}>
                 <Box
                     position={'absolute'}
                     top={0}
@@ -224,6 +250,8 @@ export default function LandingPage() {
                     bgImage={'url(https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80)'}
                     bgSize={'cover'}
                     bgPosition={'center'}
+                    transform="scale(1.05)" // Subtle zoom effect
+                    transition="transform 10s ease-out"
                 >
                     <Box
                         position={'absolute'}
@@ -231,8 +259,8 @@ export default function LandingPage() {
                         left={0}
                         w={'full'}
                         h={'full'}
-                        bgGradient={'linear(to-r, blue.900 60%, transparent)'}
-                        opacity={0.9}
+                        bgGradient={'linear(to-r, blue.900 60%, blackAlpha.600)'}
+                        opacity={0.92}
                     />
                 </Box>
 
@@ -240,67 +268,105 @@ export default function LandingPage() {
                     <Stack
                         height={'full'}
                         justify={'center'}
-                        maxW={'2xl'}
+                        maxW={'3xl'}
                         spacing={8}
+                        pt={{ base: 20, md: 0 }}
                     >
-                        <MotionHeading
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8 }}
-                            fontSize={{ base: '4xl', md: '6xl' }}
-                            fontWeight={'bold'}
-                            lineHeight={'1.1'}
-                            color={'white'}
-                            textShadow="2px 2px 4px rgba(0,0,0,0.4)"
+                        <Box
+                            bg={{ base: 'blackAlpha.600', md: 'transparent' }}
+                            p={{ base: 6, md: 0 }}
+                            rounded={'2xl'}
+                            backdropFilter={{ base: 'blur(10px)', md: 'none' }}
                         >
-                            Empowering Future <br />
-                            <Text as={'span'} color={'blue.200'}>
-                                Leaders & Innovators
-                            </Text>
-                        </MotionHeading>
-                        <MotionText
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            fontSize={'xl'}
-                            color={'gray.100'}
-                            fontWeight="medium"
-                            textShadow="1px 1px 2px rgba(0,0,0,0.5)"
-                        >
-                            Gonzaga Matric Higher Secondary School provides world-class education with a focus on holistic development, academic excellence, and moral values.
-                        </MotionText>
-                        <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-                            <Button
-                                size={'lg'}
-                                rounded={'full'}
-                                colorScheme={'blue'}
-                                bg={'blue.400'}
-                                _hover={{ bg: 'blue.500' }}
-                                leftIcon={<Icon as={FiBookOpen as any} />}
-                                onClick={() => navigate('/apply')}
-                            >
-                                Apply Now
-                            </Button>
-                            <Button
-                                size={'lg'}
-                                rounded={'full'}
-                                variant={'outline'}
-                                colorScheme={'whiteAlpha'}
+                            <MotionHeading
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, ease: "easeOut" }}
+                                fontSize={{ base: '4xl', md: '7xl' }}
+                                fontWeight={'extrabold'}
+                                lineHeight={'1.1'}
                                 color={'white'}
-                                _hover={{ bg: 'whiteAlpha.200' }}
-                                leftIcon={<Icon as={FiBook as any} />}
-                                onClick={() => navigate('/learn-more')}
+                                letterSpacing={'tight'}
                             >
-                                Learn More
-                            </Button>
-                        </Stack>
+                                Empowering Future <br />
+                                <Text as={'span'} bgGradient="linear(to-r, blue.200, purple.200)" bgClip="text">
+                                    Leaders & Innovators
+                                </Text>
+                            </MotionHeading>
+                            <MotionText
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                                fontSize={{ base: 'lg', md: '2xl' }}
+                                color={'gray.200'}
+                                mt={6}
+                                maxW={'2xl'}
+                                fontWeight="light"
+                            >
+                                Gonzaga Matric Higher Secondary School provides world-class education with a focus on holistic development, academic excellence, and moral values.
+                            </MotionText>
+                            <Stack direction={{ base: 'column', sm: 'row' }} spacing={4} mt={8}>
+                                <Button
+                                    size={'lg'}
+                                    rounded={'full'}
+                                    bg={'blue.500'}
+                                    color={'white'}
+                                    px={8}
+                                    height={'60px'}
+                                    fontSize={'lg'}
+                                    _hover={{ bg: 'blue.400', transform: 'translateY(-2px)', shadow: 'xl' }}
+                                    transition={'all 0.3s ease'}
+                                    leftIcon={<Icon as={FiBookOpen as any} />}
+                                    onClick={() => navigate('/apply')}
+                                >
+                                    Apply Now
+                                </Button>
+                                <Button
+                                    size={'lg'}
+                                    rounded={'full'}
+                                    variant={'outline'}
+                                    colorScheme={'whiteAlpha'}
+                                    color={'white'}
+                                    px={8}
+                                    height={'60px'}
+                                    fontSize={'lg'}
+                                    _hover={{ bg: 'whiteAlpha.200', transform: 'translateY(-2px)' }}
+                                    transition={'all 0.3s ease'}
+                                    leftIcon={<Icon as={FiBook as any} />}
+                                    onClick={() => navigate('/learn-more')}
+                                >
+                                    Learn More
+                                </Button>
+                            </Stack>
+                        </Box>
                     </Stack>
                 </Container>
             </Box>
 
-            {/* Features Section */}
-            <Box py={20} bg={'white'}>
+            {/* Stats Section */}
+            <Box bg={'blue.900'} py={10} borderTop="1px solid" borderColor="whiteAlpha.200">
                 <Container maxW={'7xl'}>
+                    <SimpleGrid columns={{ base: 2, md: 4 }} spacing={8}>
+                        <StatCard label={'Students'} value={'1,500+'} icon={FiUsers} />
+                        <StatCard label={'Teachers'} value={'100+'} icon={FiUsers} />
+                        <StatCard label={'Pass Rate'} value={'100%'} icon={FiCheckCircle} />
+                        <StatCard label={'Years of Excellence'} value={'25+'} icon={FiAward} />
+                    </SimpleGrid>
+                </Container>
+            </Box>
+
+            {/* Features Section */}
+            <Box py={24} bg={'white'} position="relative">
+                <Container maxW={'7xl'}>
+                    <VStack spacing={4} mb={16} textAlign={'center'}>
+                        <Tag size={'lg'} colorScheme={'blue'} rounded={'full'}>Why Choose Us</Tag>
+                        <Heading fontSize={{ base: '3xl', md: '5xl' }} fontWeight={'bold'}>
+                            Excellence in Education
+                        </Heading>
+                        <Text fontSize={'xl'} color={'gray.500'} maxW={'2xl'}>
+                            We provide a nurturing environment where students can thrive academically, socially, and emotionally.
+                        </Text>
+                    </VStack>
                     <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
                         <FeatureCard
                             index={0}
@@ -377,6 +443,38 @@ export default function LandingPage() {
                         </Box>
                     </SimpleGrid>
                 </Container>
+            </Box>
+
+            {/* CTA Section */}
+            <Box bg={'blue.600'} position={'relative'} overflow={'hidden'}>
+                <Container maxW={'7xl'} py={20} position={'relative'} zIndex={1}>
+                    <Stack direction={{ base: 'column', md: 'row' }} spacing={10} align={'center'} justify={'space-between'}>
+                        <Box>
+                            <Heading color={'white'} fontSize={'4xl'} mb={4}>
+                                Ready to Join Our Community?
+                            </Heading>
+                            <Text color={'blue.100'} fontSize={'xl'} maxW={'2xl'}>
+                                Take the first step towards a bright future. Apply now for the upcoming academic year.
+                            </Text>
+                        </Box>
+                        <Button
+                            size={'lg'}
+                            height={'60px'}
+                            px={8}
+                            bg={'white'}
+                            color={'blue.600'}
+                            fontSize={'lg'}
+                            rounded={'full'}
+                            _hover={{ bg: 'gray.100', transform: 'scale(1.05)' }}
+                            onClick={() => navigate('/apply')}
+                        >
+                            Start Application
+                        </Button>
+                    </Stack>
+                </Container>
+                {/* Decorative circles */}
+                <Box position={'absolute'} top={-10} right={-10} w={64} h={64} bg={'whiteAlpha.100'} rounded={'full'} />
+                <Box position={'absolute'} bottom={-10} left={-10} w={48} h={48} bg={'whiteAlpha.100'} rounded={'full'} />
             </Box>
 
             <PublicFooter />
